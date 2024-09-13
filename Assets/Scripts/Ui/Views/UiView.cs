@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Controllers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,17 +8,31 @@ namespace Ui.Views
 {
     public class UiView : MonoBehaviour
     {
-
         [Header("UI VIEW elements")]
 
         [SerializeField] private bool UnpauseOnClose = false;
         [SerializeField] private bool CloseOnNewView = true;
         [SerializeField] private Button BackButon;
-
+        [SerializeField] private Button firstSelected;
+        
+        public Button FirstSelected
+        {
+            get => firstSelected;
+            set => firstSelected = value;
+        }
+        
         private UiView ParentView;
         public virtual void Awake()
         {
             BackButon.onClick.AddListener(()=> DisableView_OnClick(this));
+        }
+
+        private void OnEnable()
+        {
+            if (firstSelected != null)
+            {
+                StartCoroutine(SelectFirstButton());
+            }
         }
 
         public void ActiveView_OnClick(UiView viewToActive)
@@ -26,8 +41,7 @@ namespace Ui.Views
             viewToActive.ActiveView();
             this.ActiveView(!CloseOnNewView);
         }
-   
-
+        
         private void DisableView_OnClick(UiView viewToDisable)
         {
             viewToDisable.DisableView();
@@ -37,11 +51,16 @@ namespace Ui.Views
         {
             viewToDisable.DestroyView();
         }
+        
+        public IEnumerator SelectFirstButton()
+        {
+            yield return new WaitForEndOfFrame();
+            firstSelected.Select();
+        }
 
         public void SetParentView(UiView parentView)
         {
             ParentView = parentView;
-        
         }
 
         public void ActiveView(bool active)

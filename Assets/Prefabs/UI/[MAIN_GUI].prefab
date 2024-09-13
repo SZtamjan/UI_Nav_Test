@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 3
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1358,6 +1358,7 @@ MonoBehaviour:
   UnpauseOnClose: 0
   CloseOnNewView: 1
   BackButon: {fileID: 4480285739139039147}
+  firstSelected: {fileID: 4480285739139039147}
 --- !u!1 &1168279293455212775
 GameObject:
   m_ObjectHideFlags: 0
@@ -2306,6 +2307,7 @@ MonoBehaviour:
   UnpauseOnClose: 0
   CloseOnNewView: 1
   BackButon: {fileID: 5748357057442252130}
+  firstSelected: {fileID: 5748357057442252130}
 --- !u!1 &1941993581914623375
 GameObject:
   m_ObjectHideFlags: 0
@@ -4190,6 +4192,7 @@ MonoBehaviour:
   UnpauseOnClose: 0
   CloseOnNewView: 1
   BackButon: {fileID: 9038020806785378734}
+  firstSelected: {fileID: 9038020806785378734}
 --- !u!1 &3472454193382289901
 GameObject:
   m_ObjectHideFlags: 0
@@ -4281,6 +4284,7 @@ MonoBehaviour:
   UnpauseOnClose: 1
   CloseOnNewView: 1
   BackButon: {fileID: 6015147282059271788}
+  firstSelected: {fileID: 0}
 --- !u!1 &3740049496177446783
 GameObject:
   m_ObjectHideFlags: 0
@@ -5491,7 +5495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 2
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -9174,6 +9178,7 @@ MonoBehaviour:
   UnpauseOnClose: 1
   CloseOnNewView: 0
   BackButon: {fileID: 6082014409514280659}
+  firstSelected: {fileID: 0}
   SoulItemPlaceHolder: {fileID: 6435406957881164876}
   Description: {fileID: 8146150602232835790}
   Name: {fileID: 3747887395249707520}
@@ -11043,15 +11048,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Anchors:
   - Anchor: {fileID: 5145512495467932951}
-    Object: {fileID: 8146150602250547369}
+    AnchoredObject: {fileID: 0}
+    IsActiveAtStart: 0
   - Anchor: {fileID: 1514455783779499818}
-    Object: {fileID: 3689445981451403350}
+    AnchoredObject: {fileID: 0}
+    IsActiveAtStart: 0
   - Anchor: {fileID: 4587791987496830330}
-    Object: {fileID: 888035740035264678}
+    AnchoredObject: {fileID: 0}
+    IsActiveAtStart: 0
   - Anchor: {fileID: 3693200964684646271}
-    Object: {fileID: 3454387749053439537}
+    AnchoredObject: {fileID: 0}
+    IsActiveAtStart: 0
   - Anchor: {fileID: 5418704154555662531}
-    Object: {fileID: 1935833308030134117}
+    AnchoredObject: {fileID: 0}
+    IsActiveAtStart: 0
 --- !u!1 &8146150602901070225
 GameObject:
   m_ObjectHideFlags: 0

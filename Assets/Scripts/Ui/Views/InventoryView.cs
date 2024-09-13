@@ -33,6 +33,7 @@ namespace Ui.Views
             {
                 SoulInformation newSoul = Instantiate(SoulItemPlaceHolder.gameObject, ContentParent).GetComponent<SoulInformation>();
                 newSoul.SetSoulItem(SoulController.Instance.Souls[i], () => SoulItem_OnClick(newSoul));
+                if (i == 0) FirstSelected = newSoul.GetComponent<Button>();
             }
             SoulItemPlaceHolder.gameObject.SetActive(false);
 
@@ -41,6 +42,7 @@ namespace Ui.Views
         private void OnEnable()
         {
             ClearSoulInformation();
+            if (FirstSelected != null) StartCoroutine(SelectFirstButton());
         }
 
         private void ClearSoulInformation()
