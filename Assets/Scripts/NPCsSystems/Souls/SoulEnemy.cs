@@ -1,24 +1,27 @@
 ﻿using GameEventSystem;
+using Interfaces;
 using NPCsSystems.Enemies;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace NPCsSystems.Souls
 {
-    public class SoulEnemy : MonoBehaviour , Enemy
+    public class SoulEnemy : MonoBehaviour , IEnemy
     {
-        [SerializeField] private GameObject InteractionPanelObject;
-        [SerializeField] private GameObject ActionsPanelObject;
-        [SerializeField] private SpriteRenderer EnemySpriteRenderer;
+        [FormerlySerializedAs("InteractionPanelObject")] [SerializeField] private GameObject interactionPanelObject;
+        [FormerlySerializedAs("ActionsPanelObject")] [SerializeField] private GameObject actionsPanelObject;
+        [FormerlySerializedAs("EnemySpriteRenderer")] [SerializeField] private SpriteRenderer enemySpriteRenderer;
 
-        public GameObject InteractionPanelObjectProperty => InteractionPanelObject;
-        public GameObject ActionsPanelObjectProperty => ActionsPanelObject;
+        public GameObject InteractionPanelObjectProperty => interactionPanelObject;
+        public GameObject ActionsPanelObjectProperty => actionsPanelObject;
         
         private SpawnPoint EnemyPosition;
 
    
         public void SetupEnemy(Sprite sprite,SpawnPoint spawnPoint)
         {
-            EnemySpriteRenderer.sprite = sprite;
+            enemySpriteRenderer.sprite = sprite;
             EnemyPosition = spawnPoint;
             gameObject.SetActive(true);
         }
@@ -41,14 +44,19 @@ namespace NPCsSystems.Souls
 
         private void ActiveInteractionPanel(bool active)
         {
-            InteractionPanelObject.SetActive(active);
+            interactionPanelObject.SetActive(active);
         }
 
         private void ActiveActionPanel(bool active)
         {
-            ActionsPanelObject.SetActive(active);
+            actionsPanelObject.SetActive(active);
         }
 
+        private void SelectActionButton()
+        {
+            actionsPanelObject.transform.GetChild(0).GetComponent<Button>().Select();
+        }
+        
         private void UseBow()
         {
             // USE BOW
@@ -65,6 +73,7 @@ namespace NPCsSystems.Souls
         public void Combat_OnClick()
         {
             ActiveCombatWithEnemy();
+            SelectActionButton();
         }
 
         public void Bow_OnClick()
@@ -77,14 +86,5 @@ namespace NPCsSystems.Souls
             UseSword();
         }
         #endregion
-
-
-    }
-
-
-    public interface Enemy
-    {
-        SpawnPoint GetEnemyPosition();
-        GameObject GetEnemyObject();
     }
 }

@@ -14119,6 +14119,7 @@ GameObject:
   - component: {fileID: 8146150604206578819}
   - component: {fileID: 8146150604206578844}
   - component: {fileID: 771772591}
+  - component: {fileID: 6004473547024028823}
   m_Layer: 5
   m_Name: '[MAIN_GUI]'
   m_TagString: Untagged
@@ -14225,6 +14226,19 @@ MonoBehaviour:
   PopUp: {fileID: 9044503281899347161, guid: b8e6de1935b80234ba2a0602d9ce3b78, type: 3}
   ScreenBlocker: {fileID: 7321608800069541027}
   SoulsUiControllerInstances: []
+--- !u!114 &6004473547024028823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146150604206578845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044f11e9672f47a48c0ba5e04fb5ad23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseButton: {fileID: 8146150602390658471}
 --- !u!1 &8146150604247544863
 GameObject:
   m_ObjectHideFlags: 0

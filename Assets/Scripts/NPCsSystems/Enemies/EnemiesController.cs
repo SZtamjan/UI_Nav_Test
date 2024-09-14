@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using GameEventSystem;
+using Interfaces;
 using NPCsSystems.Souls;
+using Ui;
 using UnityEngine;
 
 namespace NPCsSystems.Enemies
@@ -45,13 +47,25 @@ namespace NPCsSystems.Enemies
             GameEvents.EnemyKilled -= EnemyKilled;
         }
 
-        private void EnemyKilled(Enemy enemy)
+        private void EnemyKilled(IEnemy enemy)
         {
             FreeSpawnPoint(enemy.GetEnemyPosition());
+            RemoveFromGUIList(enemy.GetEnemyObject());
             DestroyKilledEnemy(enemy.GetEnemyObject());
+            SelectNewButton();
             StartCoroutine(SpawnEnemyViaCor());
         }
 
+        private void RemoveFromGUIList(GameObject enemy)
+        {
+            GUIController.Instance.SoulsUiControllerInstances.Remove(enemy.GetComponent<SoulsUiController>());
+        }
+
+        private void SelectNewButton()
+        {
+            GUIController.Instance.GetComponent<MainGameUIController>().SelectMiddleSoul();
+        }
+        
         private void SpawnEnemies()
         {
             while (CurrentEnemies < MaxEnemies)
