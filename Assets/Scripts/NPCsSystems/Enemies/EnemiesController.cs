@@ -76,7 +76,7 @@ namespace NPCsSystems.Enemies
 
         private IEnumerator SpawnEnemyViaCor()
         {
-            yield return new WaitForSecondsRealtime(0.5f);
+            yield return new WaitForSeconds(0.5f);
             SpawnEnemy();
         }
 
