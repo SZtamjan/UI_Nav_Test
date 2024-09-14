@@ -90,7 +90,7 @@ namespace Ui.Views
                 Message = "THIS SOUL CANNOT BE USED IN THIS LOCALIZATION"
 
             };
-            GUIController.Insntace.ShowPopUpMessage(popUpInfo);
+            GUIController.Instance.ShowPopUpMessage(popUpInfo);
         }
 
         private void UseCurrentSoul(bool canUse)
@@ -132,7 +132,7 @@ namespace Ui.Views
                     Confirm_OnClick = () => UseCurrentSoul(isInCorrectLocalization)
 
                 };
-                UseButton.onClick.AddListener(() => GUIController.Insntace.ShowPopUpMessage(popUpInfo));
+                UseButton.onClick.AddListener(() => GUIController.Instance.ShowPopUpMessage(popUpInfo));
             }
 
 
@@ -155,7 +155,7 @@ namespace Ui.Views
                     Confirm_OnClick = () => DestroyCurrentSoul()
 
                 };
-                DestroyButton.onClick.AddListener(() => GUIController.Insntace.ShowPopUpMessage(popUpInfo));
+                DestroyButton.onClick.AddListener(() => GUIController.Instance.ShowPopUpMessage(popUpInfo));
             }
 
             DestroyButton.gameObject.SetActive(active);

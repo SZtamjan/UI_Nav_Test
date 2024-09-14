@@ -1,23 +1,15 @@
-﻿using Controllers;
+﻿using System;
+using System.Collections.Generic;
+using Controllers;
+using NPCsSystems.Souls;
+using Singleton;
 using Ui.Views;
 using UnityEngine;
 
 namespace Ui
 {
-    public class GUIController : MonoBehaviour
+    public class GUIController : Singleton<GUIController>
     {
-        #region singleton
-
-        public static GUIController Insntace;
-
-        private void Awake()
-        {
-            DisableOnStartObject.SetActive(false);
-            Insntace = this;
-        }
-
-        #endregion
-
         [SerializeField] private GameObject DisableOnStartObject;
 
         [SerializeField] private RectTransform ViewsParent;
@@ -25,12 +17,22 @@ namespace Ui
         [SerializeField] private PopUpView PopUp;
         [SerializeField] private PopUpScreenBlocker ScreenBlocker;
 
+        [HideInInspector] public List<SoulsUiController> SoulsUiControllerInstances;
+        
         private void Start()
         {
+            DisableOnStartObject.SetActive(false);
             if (ScreenBlocker)
                 ScreenBlocker.InitBlocker();
         }
 
+        public void ActivateEnemiesButton(bool value)
+        {
+            foreach (SoulsUiController soulsUiController in SoulsUiControllerInstances)
+            {
+                soulsUiController.ActivateInteractableButtonsForEnemies(value);
+            }
+        }
 
         private void ActiveInGameGUI(bool active)
         {

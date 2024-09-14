@@ -14224,6 +14224,7 @@ MonoBehaviour:
   InGameGuiObject: {fileID: 8146150604247544863}
   PopUp: {fileID: 9044503281899347161, guid: b8e6de1935b80234ba2a0602d9ce3b78, type: 3}
   ScreenBlocker: {fileID: 7321608800069541027}
+  SoulsUiControllerInstances: []
 --- !u!1 &8146150604247544863
 GameObject:
   m_ObjectHideFlags: 0
@@ -14233,6 +14234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8146150604247544862}
+  - component: {fileID: 427435797823228559}
   m_Layer: 5
   m_Name: IN_GAME
   m_TagString: Untagged
@@ -14262,6 +14264,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &427435797823228559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146150604247544863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee980bfb824423da32825a9fcef9225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8146150604295200975
 GameObject:
   m_ObjectHideFlags: 0

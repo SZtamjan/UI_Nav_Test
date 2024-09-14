@@ -179,6 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2741614182214620690}
   - component: {fileID: 4148134082533971329}
+  - component: {fileID: 7709978486848801559}
   m_Layer: 0
   m_Name: SoulEnemy
   m_TagString: Untagged
@@ -217,6 +218,18 @@ MonoBehaviour:
   InteractionPanelObject: {fileID: 2741614181772860647}
   ActionsPanelObject: {fileID: 3644848724400825762}
   EnemySpriteRenderer: {fileID: 2741614182936948965}
+--- !u!114 &7709978486848801559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2741614182214620691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3bc04ca3304f37ab65aebc5b4badb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2741614182936948960
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,8 +20,5 @@ namespace Ui
             if (OnSoulClick !=null)
                 SoulButton.onClick.AddListener(()=>OnSoulClick());
         }
-
-
-
     }
 }

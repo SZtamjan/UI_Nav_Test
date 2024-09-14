@@ -10,6 +10,9 @@ namespace NPCsSystems.Souls
         [SerializeField] private GameObject ActionsPanelObject;
         [SerializeField] private SpriteRenderer EnemySpriteRenderer;
 
+        public GameObject InteractionPanelObjectProperty => InteractionPanelObject;
+        public GameObject ActionsPanelObjectProperty => ActionsPanelObject;
+        
         private SpawnPoint EnemyPosition;
 
    

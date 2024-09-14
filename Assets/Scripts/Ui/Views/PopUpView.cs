@@ -16,11 +16,11 @@ namespace Ui.Views
 
         private void OnEnable()
         {
-            GUIController.Insntace.ActiveScreenBlocker(true, this);
+            GUIController.Instance.ActiveScreenBlocker(true, this);
         }
         private void OnDisable()
         {
-            GUIController.Insntace.ActiveScreenBlocker(false, this);
+            GUIController.Instance.ActiveScreenBlocker(false, this);
         }
 
         [Header("Pop Up Elements")]

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace NPCsSystems.Enemies
 {
-    public class EnenmiesController : MonoBehaviour
+    public class EnemiesController : MonoBehaviour
     {
         [SerializeField] private List<Sprite> AllEnemies;
         [SerializeField] private List<SpawnPoint> SpawnPoints;
