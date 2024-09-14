@@ -49,7 +49,7 @@ namespace Ui
                     Debug.LogWarning($"No button on {child.name}");
                     continue;
                 }
-                Debug.Log($"Zmieniono interactable na {btn.name}");
+
                 btn.interactable = value;
             }
         }
