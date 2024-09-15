@@ -35,7 +35,7 @@ namespace Scenes.TutorialScenes.ButtonsAndNavigation
 
         private void Awake()
         {
-            IniializeButtons();
+            InitializeButtons();
         }
 
 
@@ -143,7 +143,7 @@ namespace Scenes.TutorialScenes.ButtonsAndNavigation
                 CurrentSelectedIndex = 0;
         }
 
-        private void IniializeButtons()
+        private void InitializeButtons()
         {
             if (ContentWithButtons == null)
             {
