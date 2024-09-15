@@ -42,6 +42,7 @@ namespace Ui
         
         private void Iterate(Transform parent, bool value)
         {
+            if(parent == null) return;
             foreach (Transform child in parent)
             {
                 if(!child.TryGetComponent(out Button btn))

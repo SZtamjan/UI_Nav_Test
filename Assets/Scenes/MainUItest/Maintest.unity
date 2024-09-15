@@ -977,7 +977,8 @@ PrefabInstance:
         mo\u017Cliwe do obs\u0142u\u017Cenia bez u\u017Cywania myszki\r\n- Nawigacja
         po panelach i walce jest intuicyjna\r\n- S\u0105 widoczne podpowiedzi klawiszologii\r\n-
         Interfejsy nie otwieraj\u0105 si\u0119 jeden na drugim, i mo\u017Cliwe jest
-        sterowanie tylko po aktualnie otworzonym oknie/walce"
+        sterowanie tylko po aktualnie otworzonym oknie/walce\n\nWiadomo\u015B\u0107
+        od wykonuj\u0105cego:\nProsz\u0119 o przeczytanie README :)"
       objectReference: {fileID: 0}
     - target: {fileID: 3371887093758529593, guid: e56bfdd5b40390546bd93dc024a6c032,
         type: 3}
@@ -993,6 +994,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: Bakor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713470392560745026, guid: e56bfdd5b40390546bd93dc024a6c032,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4070091252715943934, guid: e56bfdd5b40390546bd93dc024a6c032,
         type: 3}

@@ -6,11 +6,8 @@ namespace Ui.InactivitySystem
 {
     public class InactivityController : MonoBehaviour
     {
-        [Tooltip("In seconds")] [SerializeField]
-        private float inactivityThreshold = 5.0f;
-
-        [Tooltip("In seconds")] [SerializeField]
-        private float fadeDuration = 1f;
+        [Tooltip("In seconds")] [SerializeField] private float inactivityThreshold = 5.0f;
+        [Tooltip("In seconds")] [SerializeField] private float fadeDuration = 1f;
 
         [SerializeField] private InputActionAsset inputActions;
         [SerializeField] private CanvasGroup inputInfoCanvasGroup;
