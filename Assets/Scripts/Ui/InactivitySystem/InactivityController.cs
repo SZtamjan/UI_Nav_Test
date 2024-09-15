@@ -23,7 +23,7 @@ namespace Ui.InactivitySystem
 
         private void Start()
         {
-            _lastInputTime = Time.time;
+            _lastInputTime = Time.realtimeSinceStartup;
 
             foreach (var map in inputActions.actionMaps)
             {
@@ -38,7 +38,7 @@ namespace Ui.InactivitySystem
 
         private void OnInputPerformed(InputAction.CallbackContext context)
         {
-            _lastInputTime = Time.time;
+            _lastInputTime = Time.realtimeSinceStartup;
             _triggered = true;
             
             if(!_afterInactivity) return;
@@ -48,7 +48,7 @@ namespace Ui.InactivitySystem
 
         private void Update()
         {
-            if (Time.time - _lastInputTime >= inactivityThreshold && _triggered)
+            if (Time.realtimeSinceStartup - _lastInputTime >= inactivityThreshold && _triggered)
             {
                 _triggered = false;
                 OnInactivity();
@@ -57,7 +57,7 @@ namespace Ui.InactivitySystem
 
         private void OnInactivity()
         {
-            Debug.Log("Lack of activity for " + inactivityThreshold + " seconds.");
+            //Debug.Log("Lack of activity for " + inactivityThreshold + " seconds.");
             if (_fadeInCor != null) StopCoroutine(_fadeInCor);
             _fadeInCor = StartCoroutine(FadeInCanvasGroup(true));
         }
@@ -70,7 +70,7 @@ namespace Ui.InactivitySystem
 
             while (elapsedTime < fadeDuration)
             {
-                elapsedTime += Time.deltaTime;
+                elapsedTime += Time.unscaledDeltaTime;
                 float alfa = Mathf.Clamp01(elapsedTime / fadeDuration);
 
                 if (value)
@@ -95,8 +95,14 @@ namespace Ui.InactivitySystem
                 inputInfoCanvasGroup.alpha = 0f;
             }
         }
-        
-        
+
+        private IEnumerator InfoDisplayWaveAnimation()
+        {
+            //After it's fully visible, we can add small animation where it fades in and out a little
+            //or slightly changes its size
+            //DOTween would be the best solution
+            yield return null;
+        }
 
         private void OnDestroy()
         {
