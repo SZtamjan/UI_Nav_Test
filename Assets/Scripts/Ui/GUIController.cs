@@ -1,24 +1,38 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Controllers;
 using NPCsSystems.Souls;
 using Singleton;
 using Ui.Views;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ui
 {
     public class GUIController : Singleton<GUIController>
     {
         [SerializeField] private GameObject DisableOnStartObject;
-
+        
+        [SerializeField] private Button closeWindow;
+        [SerializeField] private Scrollbar scrollObj;
+        [SerializeField] private InventoryView inventoryView;
         [SerializeField] private RectTransform ViewsParent;
         [SerializeField] private GameObject InGameGuiObject;
         [SerializeField] private PopUpView PopUp;
         [SerializeField] private PopUpScreenBlocker ScreenBlocker;
 
+        public List<Button> inventoryButtons = new List<Button>();
+
         [HideInInspector] public List<SoulsUiController> SoulsUiControllerInstances;
         
+        public InventoryView InventoryView => inventoryView;
+        
+        private void Awake()
+        {
+            inventoryButtons.Add(closeWindow);
+        }
+
         private void Start()
         {
             DisableOnStartObject.SetActive(false);
@@ -26,6 +40,27 @@ namespace Ui
                 ScreenBlocker.InitBlocker();
         }
 
+        public void SelectInventoryButton()
+        {
+            StartCoroutine(SelectInventoryButtonCor());
+        }
+
+        private IEnumerator SelectInventoryButtonCor()
+        {
+            yield return new WaitUntil(() => inventoryButtons[10].interactable); //number set randomly, just waiting for buttons to be interactable
+            if(InventoryView.FirstSelected == null) InventoryView.CheckFirstSelectedButtonAndSetNewOne();
+            InventoryView.FirstSelected.Select();
+        }
+        
+        public void ActivateInventoryButtons(bool value)
+        {
+            scrollObj.interactable = value;
+            foreach (Button btn in inventoryButtons)
+            {
+                btn.interactable = value;
+            }
+        }
+        
         public void ActivateEnemiesButton(bool value)
         {
             foreach (SoulsUiController soulsUiController in SoulsUiControllerInstances)
@@ -38,7 +73,6 @@ namespace Ui
         {
             InGameGuiObject.SetActive(active);
         }
-
 
         public void ShowPopUpMessage(PopUpInformation popUpInfo)
         {

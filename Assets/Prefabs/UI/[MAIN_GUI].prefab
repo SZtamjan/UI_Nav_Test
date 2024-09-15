@@ -1357,7 +1357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnpauseOnClose: 0
   CloseOnNewView: 1
-  BackButon: {fileID: 4480285739139039147}
+  backButon: {fileID: 4480285739139039147}
   firstSelected: {fileID: 4480285739139039147}
 --- !u!1 &1168279293455212775
 GameObject:
@@ -2317,7 +2317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnpauseOnClose: 0
   CloseOnNewView: 1
-  BackButon: {fileID: 5748357057442252130}
+  backButon: {fileID: 5748357057442252130}
   firstSelected: {fileID: 5748357057442252130}
 --- !u!1 &1941993581914623375
 GameObject:
@@ -4213,7 +4213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnpauseOnClose: 0
   CloseOnNewView: 1
-  BackButon: {fileID: 9038020806785378734}
+  backButon: {fileID: 9038020806785378734}
   firstSelected: {fileID: 9038020806785378734}
 --- !u!1 &3472454193382289901
 GameObject:
@@ -4305,8 +4305,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnpauseOnClose: 1
   CloseOnNewView: 1
-  BackButon: {fileID: 6015147282059271788}
-  firstSelected: {fileID: 0}
+  backButon: {fileID: 6015147282059271788}
+  firstSelected: {fileID: 6015147282059271788}
 --- !u!1 &3740049496177446783
 GameObject:
   m_ObjectHideFlags: 0
@@ -9199,7 +9199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnpauseOnClose: 1
   CloseOnNewView: 0
-  BackButon: {fileID: 6082014409514280659}
+  backButon: {fileID: 6082014409514280659}
   firstSelected: {fileID: 0}
   SoulItemPlaceHolder: {fileID: 6435406957881164876}
   Description: {fileID: 8146150602232835790}
@@ -9207,6 +9207,7 @@ MonoBehaviour:
   Avatar: {fileID: 8146150602975384026}
   UseButton: {fileID: 8146150603438539386}
   DestroyButton: {fileID: 8146150602994425964}
+  SoulsButtons: []
 --- !u!1 &8146150602256720375
 GameObject:
   m_ObjectHideFlags: 0
@@ -14259,10 +14260,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisableOnStartObject: {fileID: 9136090258779202840}
+  closeWindow: {fileID: 6082014409514280659}
+  scrollObj: {fileID: 8146150603482928269}
+  inventoryView: {fileID: 2400587851699901495}
   ViewsParent: {fileID: 8146150602880886203}
   InGameGuiObject: {fileID: 8146150604247544863}
   PopUp: {fileID: 9044503281899347161, guid: b8e6de1935b80234ba2a0602d9ce3b78, type: 3}
   ScreenBlocker: {fileID: 7321608800069541027}
+  inventoryButtons: []
   SoulsUiControllerInstances: []
 --- !u!114 &6004473547024028823
 MonoBehaviour:

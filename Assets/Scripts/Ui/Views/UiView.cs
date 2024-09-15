@@ -2,29 +2,34 @@
 using System.Collections;
 using Controllers;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Ui.Views
 {
     public class UiView : MonoBehaviour
     {
-        [Header("UI VIEW elements")]
+        [Header("UI VIEW elements")] [SerializeField]
+        private bool UnpauseOnClose = false;
 
-        [SerializeField] private bool UnpauseOnClose = false;
         [SerializeField] private bool CloseOnNewView = true;
-        [SerializeField] private Button BackButon;
+        [SerializeField] private Button backButon;
         [SerializeField] private Button firstSelected;
+
+        public Button BackButton => backButon;
         
         public Button FirstSelected
         {
             get => firstSelected;
             set => firstSelected = value;
         }
-        
+
         private UiView ParentView;
+
         public virtual void Awake()
         {
-            BackButon.onClick.AddListener(()=> DisableView_OnClick(this));
+            backButon.onClick.AddListener(() => DisableView_OnClick(this));
         }
 
         private void OnEnable()
@@ -41,7 +46,7 @@ namespace Ui.Views
             viewToActive.ActiveView();
             this.ActiveView(!CloseOnNewView);
         }
-        
+
         private void DisableView_OnClick(UiView viewToDisable)
         {
             viewToDisable.DisableView();
@@ -51,11 +56,17 @@ namespace Ui.Views
         {
             viewToDisable.DestroyView();
         }
-        
+
         public IEnumerator SelectFirstButton()
         {
             yield return new WaitForEndOfFrame();
             firstSelected.Select();
+        }
+        
+        public IEnumerator SelectButton(Button btn)
+        {
+            yield return new WaitForEndOfFrame();
+            btn.Select();
         }
 
         public void SetParentView(UiView parentView)
@@ -71,10 +82,10 @@ namespace Ui.Views
         public void ActiveView(Action onBackButtonAction = null)
         {
             if (onBackButtonAction != null)
-                BackButon.onClick.AddListener(() => onBackButtonAction());
+                backButon.onClick.AddListener(() => onBackButtonAction());
 
 
-            if(!gameObject.activeSelf)
+            if (!gameObject.activeSelf)
                 this.ActiveView(true);
         }
 
@@ -86,10 +97,10 @@ namespace Ui.Views
             }
 
 
-            if(UnpauseOnClose)
+            if (UnpauseOnClose)
                 GameController.Instance.IsPaused = false;
 
-            this.ActiveView(false);      
+            this.ActiveView(false);
         }
 
         public void DestroyView()
@@ -104,16 +115,12 @@ namespace Ui.Views
 
         public void DisableBackButton()
         {
-            BackButon.gameObject.SetActive(false);
+            backButon.gameObject.SetActive(false);
         }
 
         public Button GetBackButton()
         {
-            return BackButon;
+            return backButon;
         }
     }
 }
-
-
-
-

@@ -1,4 +1,5 @@
-﻿using Controllers;
+﻿using System.Collections.Generic;
+using Controllers;
 using NPCsSystems.Souls;
 using ScriptableObjectsScripts;
 using UnityEngine;
@@ -8,9 +9,9 @@ namespace Ui.Views
 {
     public class InventoryView : UiView
     {
+        [Header("Inventory Elements")] [SerializeField]
+        private SoulInformation SoulItemPlaceHolder;
 
-        [Header("Inventory Elements")]
-        [SerializeField] private SoulInformation SoulItemPlaceHolder;
         [SerializeField] private Text Description;
         [SerializeField] private Text Name;
         [SerializeField] private Image Avatar;
@@ -20,29 +21,52 @@ namespace Ui.Views
         private RectTransform ContentParent;
         private GameObject CurrentSelectedGameObject;
         private SoulInformation CurrentSoulInformation;
+
+        public List<Button> SoulsButtons = new List<Button>();
+
+        public List<Button> activePopUpButton;
+
         public override void Awake()
         {
             base.Awake();
             ContentParent = (RectTransform)SoulItemPlaceHolder.transform.parent;
             InitializeInventoryItems();
+            GUIController.Instance.inventoryButtons.Add(UseButton);
+            GUIController.Instance.inventoryButtons.Add(DestroyButton);
         }
 
         private void InitializeInventoryItems()
         {
             for (int i = 0, j = SoulController.Instance.Souls.Count; i < j; i++)
             {
-                SoulInformation newSoul = Instantiate(SoulItemPlaceHolder.gameObject, ContentParent).GetComponent<SoulInformation>();
+                SoulInformation newSoul = Instantiate(SoulItemPlaceHolder.gameObject, ContentParent)
+                    .GetComponent<SoulInformation>();
                 newSoul.SetSoulItem(SoulController.Instance.Souls[i], () => SoulItem_OnClick(newSoul));
+                SoulsButtons.Add(newSoul.GetComponent<Button>());
                 if (i == 0) FirstSelected = newSoul.GetComponent<Button>();
+                GUIController.Instance.inventoryButtons.Add(newSoul.GetComponent<Button>());
             }
-            SoulItemPlaceHolder.gameObject.SetActive(false);
 
+            SoulItemPlaceHolder.gameObject.SetActive(false);
         }
 
         private void OnEnable()
         {
             ClearSoulInformation();
             if (FirstSelected != null) StartCoroutine(SelectFirstButton());
+        }
+
+        public void CheckFirstSelectedButtonAndSetNewOne()
+        {
+            if (FirstSelected != null) return;
+            foreach (Button soulsButton in SoulsButtons)
+            {
+                if (soulsButton != null)
+                {
+                    FirstSelected = soulsButton;
+                    return;
+                }
+            }
         }
 
         private void ClearSoulInformation()
@@ -54,9 +78,7 @@ namespace Ui.Views
             SetupDestroyButton(false);
             CurrentSelectedGameObject = null;
             CurrentSoulInformation = null;
-
         }
-
 
         public void SoulItem_OnClick(SoulInformation soulInformation)
         {
@@ -75,9 +97,13 @@ namespace Ui.Views
             SetupDestroyButton(soulItem.CanBeDestroyed);
         }
 
-        private void SelectElement(int index)
+        public void SelectPopUpButton()
         {
-
+            foreach (Button btn in activePopUpButton)
+            {
+                btn.Select();
+                return;
+            }
         }
 
         private void CantUseCurrentSoul()
@@ -87,13 +113,13 @@ namespace Ui.Views
                 DisableOnConfirm = true,
                 UseOneButton = true,
                 Header = "CAN'T USE",
-                Message = "THIS SOUL CANNOT BE USED IN THIS LOCALIZATION"
-
+                Message = "THIS SOUL CANNOT BE USED IN THIS LOCALIZATION",
+                ButtonControl_OnClick = () => SelectPopUpButton()
             };
             GUIController.Instance.ShowPopUpMessage(popUpInfo);
         }
 
-        private void UseCurrentSoul(bool canUse)
+        private void UseCurrentSoul(bool canUse) //always wrong localization
         {
             if (!canUse)
             {
@@ -101,18 +127,16 @@ namespace Ui.Views
             }
             else
             {
-
                 //USE SOUL
+                SoulsButtons.Remove(CurrentSelectedGameObject.GetComponent<Button>());
                 Destroy(CurrentSelectedGameObject);
                 ClearSoulInformation();
             }
-
-           
         }
-
 
         private void DestroyCurrentSoul()
         {
+            GUIController.Instance.inventoryButtons.Remove(CurrentSelectedGameObject.GetComponent<Button>());
             Destroy(CurrentSelectedGameObject);
             ClearSoulInformation();
         }
@@ -122,29 +146,27 @@ namespace Ui.Views
             UseButton.onClick.RemoveAllListeners();
             if (active)
             {
-                bool isInCorrectLocalization = GameController.Instance.IsCurrentLocalization(CurrentSoulInformation.soulItem.UsableInLocalization);
+                bool isInCorrectLocalization =
+                    GameController.Instance.IsCurrentLocalization(CurrentSoulInformation.soulItem.UsableInLocalization);
                 PopUpInformation popUpInfo = new PopUpInformation
                 {
                     DisableOnConfirm = isInCorrectLocalization,
                     UseOneButton = false,
                     Header = "USE ITEM",
                     Message = "Are you sure you want to USE: " + CurrentSoulInformation.soulItem.Name + " ?",
-                    Confirm_OnClick = () => UseCurrentSoul(isInCorrectLocalization)
-
+                    Confirm_OnClick = () => UseCurrentSoul(isInCorrectLocalization),
                 };
                 UseButton.onClick.AddListener(() => GUIController.Instance.ShowPopUpMessage(popUpInfo));
             }
 
 
-
             UseButton.gameObject.SetActive(active);
-
         }
 
         private void SetupDestroyButton(bool active)
         {
             DestroyButton.onClick.RemoveAllListeners();
-            if (active)    
+            if (active)
             {
                 PopUpInformation popUpInfo = new PopUpInformation
                 {
@@ -152,16 +174,12 @@ namespace Ui.Views
                     UseOneButton = false,
                     Header = "DESTROY ITEM",
                     Message = "Are you sure you want to DESTROY: " + Name.text + " ?",
-                    Confirm_OnClick = () => DestroyCurrentSoul()
-
+                    Confirm_OnClick = () => DestroyCurrentSoul(),
                 };
                 DestroyButton.onClick.AddListener(() => GUIController.Instance.ShowPopUpMessage(popUpInfo));
             }
 
             DestroyButton.gameObject.SetActive(active);
         }
-
-
-
     }
 }
