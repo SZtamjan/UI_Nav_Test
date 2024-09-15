@@ -21,7 +21,9 @@ namespace Ui.InactivitySystem
         private void Start()
         {
             _lastInputTime = Time.realtimeSinceStartup;
-
+            
+            inputActions.actionMaps[1].actions[2].performed += CancelTest;
+            
             foreach (var map in inputActions.actionMaps)
             {
                 foreach (var action in map.actions)
@@ -33,6 +35,11 @@ namespace Ui.InactivitySystem
             inputActions.Enable();
         }
 
+        private void CancelTest(InputAction.CallbackContext context)
+        {
+            Debug.Log("Canceled");
+        }
+        
         private void OnInputPerformed(InputAction.CallbackContext context)
         {
             _lastInputTime = Time.realtimeSinceStartup;
@@ -45,6 +52,7 @@ namespace Ui.InactivitySystem
 
         private void Update()
         {
+            
             if (Time.realtimeSinceStartup - _lastInputTime >= inactivityThreshold && _triggered)
             {
                 _triggered = false;
@@ -103,6 +111,8 @@ namespace Ui.InactivitySystem
 
         private void OnDestroy()
         {
+            inputActions.actionMaps[1].actions[2].performed -= CancelTest;
+            
             foreach (var map in inputActions.actionMaps)
             {
                 foreach (var action in map.actions)
