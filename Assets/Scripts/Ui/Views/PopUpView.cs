@@ -17,14 +17,12 @@ namespace Ui.Views
 
         private void OnEnable()
         {
-            GUIController.Instance.ActivateInventoryButtons(false);
             GUIController.Instance.ActiveScreenBlocker(true, this);
             StartCoroutine(SelectFirstButton());
         }
 
         private void OnDisable()
         {
-            GUIController.Instance.ActivateInventoryButtons(true);
             GUIController.Instance.ActiveScreenBlocker(false, this);
         }
 
@@ -38,19 +36,21 @@ namespace Ui.Views
             GUIController guiController = GUIController.Instance;
             InventoryView invView = guiController.InventoryView;
             
+            guiController.ActivateInventoryButtons(false);
+            
             ClearPopUp();
             LabelText.text = popUpInfo.Header;
             MessageText.text = popUpInfo.Message;
 
             if (popUpInfo.UseOneButton)
             {
-                //dodac jeszcze wylaczanie interakcji przyciska w tle z inventoryview.activePopUpButton
-                //a pozniej wlaczenie na wylaczenie tego popupu z jednym przyciskiem
+                invView.SetInteractableButtonsOnPopUpView(false);
                 DisableBackButton();
                 YesButton.GetComponentInChildren<Text>().text = "OK";
+                YesButton.onClick.AddListener(() => invView.SetInteractableButtonsOnPopUpView(true));
                 StartCoroutine(SelectButton(YesButton));
             }
-
+            
             if (popUpInfo.Confirm_OnClick != null)
                 YesButton.onClick.AddListener(() => popUpInfo.Confirm_OnClick());
 
@@ -59,8 +59,12 @@ namespace Ui.Views
 
             if (popUpInfo.DisableOnConfirm)
             {
-                YesButton.onClick.AddListener(invView.activePopUpButton.Clear);
-                YesButton.onClick.AddListener(guiController.SelectInventoryButton);
+                if(!popUpInfo.UseOneButton)
+                {
+                    YesButton.onClick.AddListener(invView.activePopUpButton.Clear);
+                    YesButton.onClick.AddListener(guiController.SelectInventoryButton);
+                    YesButton.onClick.AddListener(() => guiController.ActivateInventoryButtons(true));
+                }
                 
                 YesButton.onClick.AddListener(() => DestroyView());
             }
@@ -72,6 +76,7 @@ namespace Ui.Views
                 
                 BackButton.onClick.AddListener(invView.activePopUpButton.Clear);
                 BackButton.onClick.AddListener(guiController.SelectInventoryButton);
+                BackButton.onClick.AddListener(() => guiController.ActivateInventoryButtons(true));
                 
                 StartCoroutine(SelectButton(FirstSelected));
             }

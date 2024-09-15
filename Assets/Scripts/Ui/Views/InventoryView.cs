@@ -56,6 +56,14 @@ namespace Ui.Views
             if (FirstSelected != null) StartCoroutine(SelectFirstButton());
         }
 
+        public void SetInteractableButtonsOnPopUpView(bool value)
+        {
+            foreach (Button b in activePopUpButton)
+            {
+                b.interactable = value;
+            }
+        }
+        
         public void CheckFirstSelectedButtonAndSetNewOne()
         {
             if (FirstSelected != null) return;
