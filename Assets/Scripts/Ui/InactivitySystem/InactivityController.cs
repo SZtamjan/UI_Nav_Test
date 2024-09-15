@@ -1,16 +1,26 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Ui.InactivitySystem
 {
     public class InactivityController : MonoBehaviour
     {
-        [Tooltip("In seconds")] public float inactivityThreshold = 5.0f;
+        [Tooltip("In seconds")] [SerializeField]
+        private float inactivityThreshold = 5.0f;
+
+        [Tooltip("In seconds")] [SerializeField]
+        private float fadeDuration = 1f;
+
         [SerializeField] private InputActionAsset inputActions;
+        [SerializeField] private CanvasGroup inputInfoCanvasGroup;
 
         private bool _triggered = true;
         private float _lastInputTime;
-        
+
+        private Coroutine _fadeInCor;
+        private bool _afterInactivity = false;
+
         private void Start()
         {
             _lastInputTime = Time.time;
@@ -30,6 +40,10 @@ namespace Ui.InactivitySystem
         {
             _lastInputTime = Time.time;
             _triggered = true;
+            
+            if(!_afterInactivity) return;
+            if (_fadeInCor != null) StopCoroutine(_fadeInCor);
+            _fadeInCor = StartCoroutine(FadeInCanvasGroup(false));
         }
 
         private void Update()
@@ -44,7 +58,45 @@ namespace Ui.InactivitySystem
         private void OnInactivity()
         {
             Debug.Log("Lack of activity for " + inactivityThreshold + " seconds.");
+            if (_fadeInCor != null) StopCoroutine(_fadeInCor);
+            _fadeInCor = StartCoroutine(FadeInCanvasGroup(true));
         }
+
+        private IEnumerator FadeInCanvasGroup(bool value)
+        {
+            _afterInactivity = value;
+            
+            float elapsedTime = 0f;
+
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float alfa = Mathf.Clamp01(elapsedTime / fadeDuration);
+
+                if (value)
+                {
+                    inputInfoCanvasGroup.alpha = alfa; //fade in
+                }
+                else
+                {
+                    inputInfoCanvasGroup.alpha = 1 - alfa; //fade out
+                }
+
+
+                yield return null;
+            }
+
+            if (value) //Just to be sure its visible or not visible all the way
+            {
+                inputInfoCanvasGroup.alpha = 1f;
+            }
+            else
+            {
+                inputInfoCanvasGroup.alpha = 0f;
+            }
+        }
+        
+        
 
         private void OnDestroy()
         {
