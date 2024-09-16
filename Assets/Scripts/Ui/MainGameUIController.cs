@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NPCsSystems.Souls;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Ui
@@ -16,6 +17,7 @@ namespace Ui
         private void Awake()
         {
             SetupVariables();
+            
         }
 
         private IEnumerator Start()
@@ -23,7 +25,11 @@ namespace Ui
             yield return new WaitForSeconds(.2f);
             SelectMiddleSoul();
         }
+        
+        
 
+        #region MiddleSoulSelection
+        
         public void SelectMiddleSoul()
         {
             SoulEnemy soul = DetectMiddleSoul();
@@ -101,6 +107,8 @@ namespace Ui
 
             return -1;
         }
+        
+        #endregion
 
         private void SetupVariables()
         {

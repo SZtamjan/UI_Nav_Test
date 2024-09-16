@@ -36,6 +36,12 @@ namespace NPCsSystems.Souls
             return this.gameObject;
         }
 
+        public void HideCombatWithEnemy()
+        {
+            ActiveInteractionPanel(true);
+            ActiveActionPanel(false);
+        }
+        
         private void ActiveCombatWithEnemy()
         {
             ActiveInteractionPanel(false);

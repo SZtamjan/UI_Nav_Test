@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using NPCsSystems.Enemies;
 using NPCsSystems.Souls;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Ui
@@ -17,18 +19,20 @@ namespace Ui
             SendDataToGUIController();
         }
 
-        private void SetupVariables()
+        public void HideCombatButtons()
         {
-            if (!TryGetComponent(out SoulEnemy soulEnemy))
+            List<SoulsUiController> souls = GUIController.Instance.SoulsUiControllerInstances;
+            foreach (SoulsUiController soul in souls)
             {
-                Debug.LogWarning($"Lack of {nameof(SoulEnemy)} on GameObject {gameObject.name}");
-                return;
+                if(!soul.TryGetComponent(out SoulEnemy soulEnemy))
+                {
+                    Debug.LogWarning($"No {nameof(SoulEnemy)} on {soul.name}");
+                    continue;
+                }
+                soulEnemy.HideCombatWithEnemy();
             }
-
-            _interactionPanelObject = soulEnemy.InteractionPanelObjectProperty.transform;
-            _actionsPanelObject = soulEnemy.ActionsPanelObjectProperty.transform;
         }
-
+        
         private void SendDataToGUIController()
         {
             GUIController.Instance.SoulsUiControllerInstances.Add(this);
@@ -53,6 +57,18 @@ namespace Ui
 
                 btn.interactable = value;
             }
+        }
+        
+        private void SetupVariables()
+        {
+            if (!TryGetComponent(out SoulEnemy soulEnemy))
+            {
+                Debug.LogWarning($"Lack of {nameof(SoulEnemy)} on GameObject {gameObject.name}");
+                return;
+            }
+
+            _interactionPanelObject = soulEnemy.InteractionPanelObjectProperty.transform;
+            _actionsPanelObject = soulEnemy.ActionsPanelObjectProperty.transform;
         }
     }
 }

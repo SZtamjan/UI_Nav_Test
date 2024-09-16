@@ -9806,6 +9806,7 @@ GameObject:
   - component: {fileID: 8146150602390658470}
   - component: {fileID: 8146150602390658471}
   - component: {fileID: 8146150602390658469}
+  - component: {fileID: 1397788758340146863}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -9916,6 +9917,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1397788758340146863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146150602390658465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5a585efa684133a0bed0d9717b28bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8146150602394358064
 GameObject:
   m_ObjectHideFlags: 0
@@ -13590,6 +13603,7 @@ GameObject:
   - component: {fileID: 8146150604023670086}
   - component: {fileID: 8146150604023670087}
   - component: {fileID: 8146150604023670080}
+  - component: {fileID: 5359294022038840396}
   m_Layer: 5
   m_Name: InvetoryButton
   m_TagString: Untagged
@@ -13700,6 +13714,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5359294022038840396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146150604023670082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5a585efa684133a0bed0d9717b28bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8146150604032705786
 GameObject:
   m_ObjectHideFlags: 0

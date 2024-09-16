@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 2741614181772860646}
   m_Layer: 0
   m_Name: MainInteraction_Panel
-  m_TagString: Untagged
+  m_TagString: SoulMainInteraction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 7709978486848801559}
   m_Layer: 0
   m_Name: SoulEnemy
-  m_TagString: Untagged
+  m_TagString: Soul
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,9 +215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674bdd931343dd94dbeb2fdfe7d5a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractionPanelObject: {fileID: 2741614181772860647}
-  ActionsPanelObject: {fileID: 3644848724400825762}
-  EnemySpriteRenderer: {fileID: 2741614182936948965}
+  interactionPanelObject: {fileID: 2741614181772860647}
+  actionsPanelObject: {fileID: 3644848724400825762}
+  enemySpriteRenderer: {fileID: 2741614182936948965}
 --- !u!114 &7709978486848801559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 717567057732559105}
   m_Layer: 0
   m_Name: Actions_Panel
-  m_TagString: Untagged
+  m_TagString: SoulAction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -841,6 +841,7 @@ GameObject:
   - component: {fileID: 185737337991018694}
   - component: {fileID: 8452450492084603706}
   - component: {fileID: 4521928487620096981}
+  - component: {fileID: 5232657285732998109}
   m_Layer: 0
   m_Name: Combat_Button
   m_TagString: Untagged
@@ -978,6 +979,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5232657285732998109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8005579392580758839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5a585efa684133a0bed0d9717b28bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soulsUiController: {fileID: 7709978486848801559}
 --- !u!1 &8026150704751933936
 GameObject:
   m_ObjectHideFlags: 0
