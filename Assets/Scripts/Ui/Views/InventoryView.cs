@@ -63,7 +63,7 @@ namespace Ui.Views
                 b.interactable = value;
             }
         }
-        
+
         public void CheckFirstSelectedButtonAndSetNewOne()
         {
             if (FirstSelected != null) return;
@@ -75,6 +75,17 @@ namespace Ui.Views
                     return;
                 }
             }
+        }
+
+        public void SelectLastSelected()
+        {
+            if (CurrentSelectedGameObject == null)
+            {
+                GUIController.Instance.SelectInventoryButton();
+                return;
+            }
+
+            CurrentSelectedGameObject.GetComponent<Button>().Select();
         }
 
         private void ClearSoulInformation()

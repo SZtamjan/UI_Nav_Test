@@ -62,7 +62,7 @@ namespace Ui.Views
                 if(!popUpInfo.UseOneButton)
                 {
                     YesButton.onClick.AddListener(invView.activePopUpButton.Clear);
-                    YesButton.onClick.AddListener(guiController.SelectInventoryButton);
+                    YesButton.onClick.AddListener(invView.SelectLastSelected);
                     YesButton.onClick.AddListener(() => guiController.ActivateInventoryButtons(true));
                 }
                 
@@ -75,7 +75,7 @@ namespace Ui.Views
                 invView.activePopUpButton.Add(BackButton);
                 
                 BackButton.onClick.AddListener(invView.activePopUpButton.Clear);
-                BackButton.onClick.AddListener(guiController.SelectInventoryButton);
+                BackButton.onClick.AddListener(invView.SelectLastSelected);
                 BackButton.onClick.AddListener(() => guiController.ActivateInventoryButtons(true));
                 
                 StartCoroutine(SelectButton(FirstSelected));
